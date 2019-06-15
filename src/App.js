@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import logo from './logo.svg'
 import './App.css'
+import Main from './Main'
+import { tsImportEqualsDeclaration } from '@babel/types'
 
 export default class App extends Component {
 	state = {
-		isPosting: false,
+		isPosting: true,
 		tempPost: '',
 		blogEntries: [
 			{
@@ -20,34 +22,35 @@ export default class App extends Component {
 		]
 	}
 
-	// handleChange = event => {
-	// 	this.setState({
-	// 		[event.currentTarget.name]: event.currentTarget.value
-	// 	})
-	// }
-
-	// handleClick = event => {
-	// 	this.setState({
-	// 		isPosting: !this.state.isPosting
-	// 	})
-	// }
+	toggleIsPosting = () => {
+		this.setState({
+			isPosting: !this.state.isPosting
+		})
+	}
 
 	render() {
 		const entries = this.state.blogEntries.map((entry, index) => {
 			return (
-        <li>
-         <h5>{entry.user}</h5>
-         <h6>{entry.entry}</h6> 
-        </li>
-
-      )
+				<li key={index}>
+					<h5>{entry.user}</h5>
+					<h6>{entry.entry}</h6>
+				</li>
+			)
 		})
 		return (
 			<div className="App container">
 				<header className="App-header">
 					<img src={logo} className="App-logo" alt="logo" />
-					<ul>{entries}</ul>
 				</header>
+				<Main
+					isPosting={this.state.isPosting}
+					tempPost={this.state.tempPost}
+					blogEntries={this.state.blogEntries}
+					toggleIsPosting={this.toggleIsPosting}
+				>
+					{' '}
+					<ul>{entries}</ul>
+				</Main>
 			</div>
 		)
 	}
