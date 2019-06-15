@@ -6,15 +6,22 @@ export default class BlogForm extends Component {
         entry : ''
     }
 
+    
     handleChange = event => {
        this.setState({
-        [event.currentTarget.name] : event.currentTarget.value
-       })
+           [event.currentTarget.name] : event.currentTarget.value
+        })
     }
-
-	render() {
+    
+    handleSubmit = event => {
+        event.preventDefault()
+        this.props.addEntry(this.state.user, this.state.entry)
+        
+    }
+    
+	render() { 
 		return (
-			<div>
+            <div>
 				<form>
 					<div className="row">
 						<div className="twelve columns">
@@ -40,7 +47,7 @@ export default class BlogForm extends Component {
                         name="entry"
                         value={this.state.entry}
 					/>
-					<input className="button-primary" type="submit" value="Submit" />
+					<input onClick={this.handleSubmit} className="button-primary" type="submit" />
 				</form>
 			</div>
 		)

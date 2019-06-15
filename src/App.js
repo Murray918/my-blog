@@ -6,8 +6,7 @@ import { tsImportEqualsDeclaration } from '@babel/types'
 
 export default class App extends Component {
 	state = {
-		isPosting: true,
-		tempPost: '',
+		isPosting: true, 
 		blogEntries: [
 			{
 				user: 'Andrew',
@@ -27,6 +26,13 @@ export default class App extends Component {
 			isPosting: !this.state.isPosting
 		})
 	}
+ 
+  addEntry = (user, entry) => {
+    this.setState({
+      blogEntries : [{user, entry}, ...this.state.blogEntries],
+      isPosting : !this.state.isPosting
+    })
+  }
 
 	render() {
 		const entries = this.state.blogEntries.map((entry, index) => {
@@ -47,6 +53,7 @@ export default class App extends Component {
 					tempPost={this.state.tempPost}
 					blogEntries={this.state.blogEntries}
 					toggleIsPosting={this.toggleIsPosting}
+          addEntry={this.addEntry}
 				>
 					{' '}
 					<ul>{entries}</ul>

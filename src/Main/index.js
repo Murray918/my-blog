@@ -2,8 +2,8 @@ import React from 'react'
 import BlogForm from './BlogForm'
 import { tsPropertySignature } from '@babel/types';
 
-const Main = ({ isPosting, tempPost, blogEntries, toggleIsPosting, children }) => {
-
+const Main = ({ isPosting, blogEntries, toggleIsPosting, children, addEntry}) => {
+    
     function handleClick(){
         toggleIsPosting()
     }
@@ -11,7 +11,7 @@ const Main = ({ isPosting, tempPost, blogEntries, toggleIsPosting, children }) =
 
 	return (
 		<section>
-			<div>{!!isPosting ? <BlogForm /> : <button onClick={handleClick}>Click Me</button>}</div>
+			<div>{!!isPosting ? <BlogForm addEntry={addEntry}  /> : <button onClick={handleClick}>Click Me</button>}</div>
             {children}
 		</section>
 	)
